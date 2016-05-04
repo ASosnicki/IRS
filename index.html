@@ -7,13 +7,18 @@
  
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaxDay</title>
- 
+ <link rel="stylesheet" href="CSS/foundation.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
 <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
- <link rel="stylesheet" href="CSS/foundation.css" />
+ <!-- <link rel="stylesheet" href="CSS/foundation.css" /> -->
+ <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<!-- <link rel="stylesheet" href="CSS/reset.css"> <! CSS reset -->
+	<link rel="stylesheet" href="CSS/style.css"> <!-- Gem style -->
+	<script src="JS/modernizr.js"></script> <!-- Modernizr -->
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script> -->
 </head>
 <body>
 <div class="row">
@@ -21,30 +26,129 @@
 <h1><img src="IMG/irs-logo.jpg"/></h1>
 </div>
 <div class="large-9 columns">
-<ul class="right button-group">
+<!-- <ul class="right button-group">
 <li><a href="#" class="button">SignIn</a></li>
 <li><a href="#" class="button">Profile</a></li>
 <li><a href="#" class="button">Forms</a></li>
-<li><a href="#" class="button">LogOut</a></li>
+<li><a href="#" class="button">LogOut</a></li> -->
+<header role="banner">
+		<!-- <div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div> -->
+
+		<nav class="main-nav">
+			<ul>
+				<!-- inser more links here -->
+				<!-- <li><a href="#" class="button">SignIn</a></li> -->
+				<!-- <li><a href="#" class="button">Profile</a></li>
+				<li><a href="#" class="button">Forms</a></li>
+				<li><a href="#" class="button">LogOut</a></li> -->
+				<li><a class="cd-signin" href="#0">SignIn</a></li>
+				<li><a class="cd-signup" href="#0">SignUp</a></li>
+				<!-- <li><a href="#" class="cd-signup">Profile</a></li> -->
+				<!-- <li><a href="#" class="">Forms</a></li> -->
+				<!-- <li><a href="#" class="cd-signup">LogOut</a></li> -->
+			</ul>
+		</nav>
+	</header>
+
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+			<ul class="cd-switcher">
+				<li><a href="#0">Sign in</a></li>
+				<li><a href="#0">New account</a></li>
+			</ul>
+
+			<div id="cd-login"> <!-- log in form -->
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="remember-me" checked>
+						<label for="remember-me">Remember me</label>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width" type="submit" value="Login">
+					</p>
+				</form>
+				
+				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-login -->
+
+			<div id="cd-signup"> <!-- sign up form -->
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signup-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="accept-terms">
+						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Create account">
+					</p>
+				</form>
+
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-signup -->
+
+			<div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Reset password">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+			</div> <!-- cd-reset-password -->
+			<a href="#0" class="cd-close-form">Close</a>
+		</div> <!-- cd-user-modal-container -->
+	</div> <!-- cd-user-modal -->
 </ul>
 </div>
 </div>
- 
-<!--  
-<div class="row">
-<div class="large-12 columns">
-<ul class="example-orbit" data-orbit>
-<li><img src="test"></li>
-<li><img src="test2"></li>
-<li><img src="test3"></li>
-</ul>
-</div>
-</div> -->
+
 <hr/>
  
 <div class="row">
 <div class="large-4 columns">
-<img src="IMG/business.jpg"/>
+<img src="IMG/business.jpg">
 <h4>Business Tax Returns</h4>
 <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
 </div>
@@ -57,7 +161,7 @@
 <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
 </div>
 <div class="large-4 columns">
-<img style="padding-bottom: 40px; padding-top:50px;" src="IMG/binders.jpg">
+<a href="https://www.irs.gov/Filing"><img style="padding-bottom: 40px; padding-top:50px;" src="IMG/binders.jpg"></a>
 <h4>Documentation</h4>
 <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
 </div>
@@ -78,25 +182,10 @@
 </div>
 </div>
 </div>
- 
-<!-- <footer class="row">
-<div class="large-12 columns">
-<hr/>
-<div class="row">
-<div class="large-6 columns">
-<p></p>
-</div>
-<div class="large-6 columns">
-<ul class="inline-list right">
-<li><a href="#">Link 1</a></li>
-<li><a href="#">Link 2</a></li>
-<li><a href="#">Link 3</a></li>
-<li><a href="#">Link 4</a></li>
-</ul>
-</div>
-</div>
-</div> -->
+
 </footer>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="JS/main.js"></script> <!-- Gem jQuery -->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
 <script>

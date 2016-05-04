@@ -1,0 +1,19 @@
+{
+  "name": "irs",
+  "version": "1.0.0",
+  "description": "designed to simplify the users tax filing experience and increase transparency ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ASosnicki/IRS.git"
+  },
+  "author": "Asosnicki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ASosnicki/IRS/issues"
+  },
+  "homepage": "https://github.com/ASosnicki/IRS#readme"
+}
