@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile Page</title>
+    <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./node_modules/dc/dc.css"/>
+<link rel="stylesheet" href="CSS/foundation.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+<link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="CSS/style.css"> <!-- Gem style -->
+<script src="JS/modernizr.js"></script> <!-- Modernizr -->
+</head>
+<body>
+    <div class="row">
+    <div class="large-3 columns">
+<h1><img src="IMG/irs-logo.jpg"/></h1>
+</div>
+
+    <header role="banner">
+        <!-- <div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div> -->
+
+        <nav class="main-nav">
+            <ul>
+                <!-- inser more links here -->
+                <!-- <li><a href="#" class="button">SignIn</a></li> -->
+                <!-- <li><a href="#" class="button">Profile</a></li>
+                <li><a href="#" class="button">Forms</a></li>
+                <li><a href="#" class="button">LogOut</a></li> -->
+                <li><a class="cd-signin" href="#0">Back</a></li>
+                <li><a class="cd-signup" href="#0">Home</a></li>
+                <!-- <li><a href="#" class="cd-signup">Profile</a></li> -->
+                <!-- <li><a href="#" class="">Forms</a></li> -->
+                <!-- <li><a href="#" class="cd-signup">LogOut</a></li> -->
+            </ul>
+        </nav>
+    </div>
+    </header>
+
+<div id="chart-ring-year"></div>
+<div id="chart-hist-spend"></div>
+<div id="chart-row-spenders"></div>
+
+<script type="text/javascript" src="../IRS/node_modules/d3/d3.js"></script>
+<script type="text/javascript" src="../IRS/node_modules/crossfilter2/crossfilter.js"></script>
+<script type="text/javascript" src="../IRS/node_modules/dc/dc.js"></script>
+<script type="text/javascript">
+
+var yearRingChart   = dc.pieChart("#chart-ring-year"),
+    spendHistChart  = dc.barChart("#chart-hist-spend"),
+    spenderRowChart = dc.rowChart("#chart-row-spenders");
+
+// use static or load via d3.csv("spendData.csv", function(error, spendData) {/* do stuff */});
+var spendData = [
+    {Name: 'Mr A', Spent: '$40', Year: 2011},
+    {Name: 'Mr B', Spent: '$10', Year: 2011},
+    {Name: 'Mr C', Spent: '$40', Year: 2011},
+    {Name: 'Mr A', Spent: '$70', Year: 2012},
+    {Name: 'Mr B', Spent: '$20', Year: 2012},
+    {Name: 'Mr B', Spent: '$50', Year: 2013},
+    {Name: 'Mr C', Spent: '$30', Year: 2013}
+];
+
+// normalize/parse data
+spendData.forEach(function(d) {
+    d.Spent = d.Spent.match(/\d+/);
+});
+
+function remove_empty_bins(source_group) {
+    return {
+        all:function () {
+            return source_group.all().filter(function(d) {
+                return d.value != 0;
+            });
+        }
+    };
+}
+
+// set crossfilter
+var ndx = crossfilter(spendData),
+    yearDim  = ndx.dimension(function(d) {return +d.Year;}),
+    spendDim = ndx.dimension(function(d) {return Math.floor(d.Spent/10);}),
+    nameDim  = ndx.dimension(function(d) {return d.Name;}),
+    spendPerYear = yearDim.group().reduceSum(function(d) {return +d.Spent;}),
+    spendPerName = nameDim.group().reduceSum(function(d) {return +d.Spent;}),
+    spendHist    = spendDim.group().reduceCount(),
+    nonEmptyHist = remove_empty_bins(spendHist)
+
+yearRingChart
+    .width(200).height(200)
+    .dimension(yearDim)
+    .group(spendPerYear)
+    .innerRadius(50);
+
+spendHistChart
+    .width(300).height(200)
+    .dimension(spendDim)
+    .group(nonEmptyHist)
+    .x(d3.scale.ordinal())
+    .xUnits(dc.units.ordinal)
+    .elasticX(true)
+    .elasticY(true);
+
+spendHistChart.xAxis().tickFormat(function(d) {return d*10}); // convert back to base unit
+spendHistChart.yAxis().ticks(2);
+
+spenderRowChart
+    .width(350).height(200)
+    .dimension(nameDim)
+    .group(spendPerName)
+    .elasticX(true);
+
+dc.renderAll();
+
+</script>
+
+</body>
+</html>
